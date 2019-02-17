@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
 from networktables import NetworkTables
 import time
+import socket
 
 REFRESH_RATE = 0.5  # Hertz
 
-NetworkTables.initialize(server='10.14.18.2')
+my_ip = socket.gethostbyname(socket.getfqdn())
+ip_bytes = my_ip.split('.')
+ip_bytes[-1] = 2
+rio_ip = '.'.join(ip_bytes)
+NetworkTables.initialize(server=rio_ip)
 
 def log(key, value, isNew):
     print(f'{key} => {value}')
