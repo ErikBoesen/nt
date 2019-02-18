@@ -16,11 +16,15 @@ def calculate_robot_ip():
 parser = argparse.ArgumentParser(description='Interact with NetworkTables')
 parser.add_argument('--robot', nargs=1, default='localhost')
 parser.add_argument('--refresh-rate', nargs=1, default=0.5)
+parser.add_argument('--target', default=None)
 args = parser.parse_args()
 
 NetworkTables.initialize(server=args.robot)
 
 def log(key, value, isNew):
+    if args.target is not None:
+        if not key.startswith(args.target):
+            return False
     print('{key} => {value}'.format(key=colored(key, 'cyan'),
                                     value=colored(value, 'green')))
 
