@@ -2,6 +2,7 @@
 from networktables import NetworkTables
 import time
 import socket
+from termcolor import colored
 
 REFRESH_RATE = 0.5  # Hertz
 
@@ -12,7 +13,8 @@ rio_ip = '.'.join(ip_bytes)
 NetworkTables.initialize(server=rio_ip)
 
 def log(key, value, isNew):
-    print(f'{key} => {value}')
+    print('{key} => {value}'.format(key=colored(key, 'cyan'),
+                                    value=colored(value, 'green'))
 
 NetworkTables.addEntryListener(log)
 while True:
