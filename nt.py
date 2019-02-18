@@ -17,6 +17,7 @@ parser = argparse.ArgumentParser(description='Interact with NetworkTables')
 parser.add_argument('--robot', nargs=1, default='localhost')
 parser.add_argument('--refresh-rate', nargs=1, default=0.5)
 parser.add_argument('--target', default=None)
+parser.add_argument('--put', nargs=2, default=None)
 args = parser.parse_args()
 
 NetworkTables.initialize(server=args.robot)
@@ -28,6 +29,11 @@ def log(key, value, isNew):
     print('{key} => {value}'.format(key=colored(key, 'cyan'),
                                     value=colored(value, 'green')))
 
-NetworkTables.addEntryListener(log)
-while True:
-    time.sleep(1/args.refresh_rate)
+if args.put is not None:
+    key, value = tuple(args.set)
+    table = NetworkTables.getTable('')
+    table.putValue(key, value)
+else:
+    NetworkTables.addEntryListener(log)
+    while True:
+        time.sleep(1/args.refresh_rate)
