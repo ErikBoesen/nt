@@ -30,7 +30,7 @@ def log(key, value, isNew):
                                     value=colored(value, 'green')))
 
 if args.put is not None:
-    key, value = tuple(args.set)
+    key, value = tuple(args.put)
     table = NetworkTables.getTable('')
     table.putValue(key, value)
 else:
