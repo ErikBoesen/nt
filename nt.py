@@ -31,7 +31,7 @@ def log(key, value, isNew):
 
 if args.put is not None:
     key, value = tuple(args.put)
-    table = NetworkTables.getTable('')
+    table = NetworkTables.getTable('/')
     table.putValue(key, value)
 else:
     NetworkTables.addEntryListener(log)
