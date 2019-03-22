@@ -14,7 +14,7 @@ def calculate_robot_ip():
 """
 
 parser = argparse.ArgumentParser(description='Interact with NetworkTables')
-parser.add_argument('--robot', nargs=1, default='localhost')
+parser.add_argument('--robot', nargs=1, required=True)
 parser.add_argument('--refresh-rate', nargs=1, default=0.5)
 parser.add_argument('--target', default=None)
 parser.add_argument('--put', nargs=2, default=None)
